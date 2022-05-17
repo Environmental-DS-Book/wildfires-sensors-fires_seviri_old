@@ -13,3 +13,4 @@ dependencies:
   - pyhdf
   - cartopy
   - datashader
+  - dotenv
