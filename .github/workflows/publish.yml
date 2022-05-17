@@ -12,6 +12,9 @@ jobs:
   build:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    env:
+      EUMESAT_API_KEY: ${{ secrets.EUMESAT_API_KEY }}
+      EUMESAT_API_SECRET: ${{ secrets.EUMESAT_API_SECRET }}
     strategy:
       fail-fast: false
       matrix:
@@ -28,12 +31,13 @@ jobs:
           activate-environment: testrepo
           environment-file: environment.yml
       # Install extra packages
-      - name: Install jupyter dependencies
+      - name: Install jupyter dependencies and environment
         run: |
           conda install pip
           pip install jinja2==3.0.2
           pip install jupyter
           pip install nbconvert
+          pip install python-dotenv==0.20.0
       # Set notebook anme
       - name: Get properties from the config file
         id: config_file
